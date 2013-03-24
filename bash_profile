@@ -1,7 +1,11 @@
-# Path configurations
+#########################
+## Path configurations ##
+#########################
 export PATH=/usr/local/bin:$HOME/bin:$PATH
 
-## git stuff
+###############
+## git stuff ##
+###############
 alias g="git"
 alias gl="git log --decorate --color --graph --pretty=format:'%Cgreen%h%Creset%Cred%d %Creset%s %Cblue(%an, %ar, %cn, %cr)'"
 alias gl2="git log --decorate --color --graph --stat --pretty=format:'%Cgreen%h%Creset%Cred%d %Creset%s %Cblue(%an, %ar, %cn, %cr)'"
@@ -12,9 +16,8 @@ parse_git_branch() {
       ref=$(git symbolic-ref -q HEAD 2> /dev/null) || return
         echo " ("${ref#refs/heads/}") \$"
 }
+## Taken from http://blog.no-panic.at/2011/09/15/my-bash-configuration/
 function git_stats {
-# awesome work from https://github.com/esc/git-stats
-# including some modifications
 if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
     echo "Number of commits per author:"
     git --no-pager shortlog -sn --all
@@ -50,17 +53,19 @@ else
 fi
 }
 
-# Shell configurations
+##########################
+## Shell configurations ##
+##########################
 PS1="";
 PS1=$PS1'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$'
 export PS1=$PS1"$GREEN\$(parse_git_branch)$WHITE ";
 alias ls='ls -G'
 alias grep='grep --color=auto'
 
-
-# Utilities
+###############
+## Utilities ##
+###############
 ulimit -S -n 1024
-
-# no duplicates in bash history
+## no duplicates in bash history
 export HISTCONTROL=ignoredups
 
